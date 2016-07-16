@@ -10,6 +10,7 @@ function makeSongList(songList) {
     </ul>
   </div>`);
   $(".uiContainer--wrapper").html($songsDisplay);
+  // Look at song as key - let key in songList
   for (let song in songList ) {
     let currentSong = songList[song],
         $songListItem = $("<li>", {class: "song-list__item"}),

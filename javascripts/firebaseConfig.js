@@ -2,18 +2,20 @@
 
 let firebase = require("firebase/app"),
     fb = require("./fb-getter"),
+    // This is calling the getter method?
     fbData = fb();
 
+// In node modules
 require("firebase/auth");
 require("firebase/database");
 
 var config = {
   apiKey: fbData.key,
   databaseURL: fbData.url,
-  authDomain: fbData.url,
+  authDomain: fbData.authUrl,
   storageBucket: fbData.bucketUrl
 };
 
-// firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 module.exports = firebase;
