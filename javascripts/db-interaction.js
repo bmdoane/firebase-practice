@@ -84,8 +84,12 @@ let $ = require('jquery'),
 // ****************************************
 // Set up listener to grab value of Songs and see if anything has happened to it
 // .ref and .val are firebase methods
-function getSongs(callback) {
-	firebase.database().ref('Songs').on('value', function(songData) {
+function getSongs(callback, userId) {
+	console.log("userId", userId);
+	// This next line could go up top and songs be used multiple times
+	let songs = firebase.database().ref('Songs');
+	// The next line you can use these methods with SDK
+	songs.orderByChild("uid").equalTo(userId).on('value', function(songData) {
 		console.log("something happened");
 		callback(songData.val());
 	});
@@ -104,7 +108,7 @@ function deleteSong(songId) {
 
 function getSong(songId) {
 	console.log("songId", songId);
-	return firebase.database().ref(`Songs/${songId}`)
+	return firebase.database().ref(`Songs/${songId}`);
 }
 // This is not confirmed
 function editSong(songFormObj, songId) {
